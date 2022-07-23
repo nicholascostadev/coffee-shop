@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const AdvantagesContainer = styled.div`
   margin-top: 4.12rem;
@@ -7,12 +7,8 @@ export const AdvantagesContainer = styled.div`
   grid-template-columns: repeat(2, 1fr);
   gap: 1.25rem 2.5rem;
 
-  @media (max-width: 1200px) {
-    justify-content: center;
-    place-content: center;
-  }
-
   @media (max-width: 1000px) {
+    justify-items: center;
   }
 `;
 
@@ -29,18 +25,18 @@ export const Advantage = styled.div`
 `;
 
 interface AdvantageIconProps {
-  variant: 'YELLOW_DARK' | 'YELLOW_LIGHT' | 'GRAY_DARK' | 'PURPLE_LIGHT';
+  variant: "YELLOW_DARK" | "YELLOW_LIGHT" | "GRAY_DARK" | "PURPLE_LIGHT";
 }
 
 enum AdvantageIconVariant {
-  YELLOW_DARK = 'yellow-700',
-  YELLOW_LIGHT = 'yellow-400',
-  GRAY_DARK = 'gray-700',
-  PURPLE_LIGHT = 'purple-400'
+  YELLOW_DARK = "yellow-700",
+  YELLOW_LIGHT = "yellow-400",
+  GRAY_DARK = "gray-700",
+  PURPLE_LIGHT = "purple-400"
 }
 export const AdvantageIcon = styled.div<AdvantageIconProps>`
   background: ${props => props.theme[AdvantageIconVariant[props.variant]]};
-  color: ${props => props.theme['white']};
+  color: ${props => props.theme["white"]};
 
   display: flex;
   justify-content: center;

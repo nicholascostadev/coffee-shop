@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const CoffeeContainer = styled.div`
   position: relative;
-  background-color: ${props => props.theme['gray-200']};
+  background-color: ${props => props.theme["gray-200"]};
   border-top-right-radius: 32px;
   border-bottom-left-radius: 32px;
 
@@ -23,8 +23,8 @@ export const Image = styled.img`
 `;
 
 export const TagsContainer = styled.div`
-  background: ${props => props.theme['yellow-100']};
-  color: ${props => props.theme['yellow-700']};
+  background: ${props => props.theme["yellow-100"]};
+  color: ${props => props.theme["yellow-700"]};
 
   display: flex;
   justify-content: center;
@@ -42,14 +42,14 @@ export const CoffeeInfo = styled.div`
   line-height: 1.3;
 
   strong {
-    color: ${props => props.theme['gray-800']};
+    color: ${props => props.theme["gray-800"]};
     font-size: 1.25rem;
     margin: 16px 0 8px;
     display: block;
   }
 
   p {
-    color: ${props => props.theme['gray-600']};
+    color: ${props => props.theme["gray-600"]};
     font-size: 0.875rem;
   }
   //
@@ -68,7 +68,7 @@ export const CoffeeActions = styled.div`
   }
 
   > div > div {
-    background: ${props => props.theme['gray-400']};
+    background: ${props => props.theme["gray-400"]};
     border-radius: 8px;
 
     height: 2.375rem;
@@ -84,9 +84,9 @@ export const CoffeeActions = styled.div`
 `;
 
 export const PriceContainer = styled.div`
-  color: ${props => props.theme['gray-700']};
+  color: ${props => props.theme["gray-700"]};
   strong {
-    font-family: 'Baloo 2', 'Roboto', sans-serif;
+    font-family: "Baloo 2", "Roboto", sans-serif;
     font-size: 1.2rem;
 
     /* 
@@ -104,21 +104,18 @@ export const PriceContainer = styled.div`
 
 const ButtonBase = styled.button`
   border: 0;
-  color: ${props => props.theme['white']};
+  color: ${props => props.theme["white"]};
   cursor: pointer;
 
   border-radius: 8px;
   font-size: 1rem;
-  &:hover {
-    opacity: 0.8;
-  }
 `;
 
 export const CartButton = styled(ButtonBase)`
-  background: ${props => props.theme['purple-700']} !important;
+  background: ${props => props.theme["purple-700"]} !important;
   border: 0;
   border-radius: 8px;
-  color: ${props => props.theme['white']};
+  color: ${props => props.theme["white"]};
 
   padding: 8px;
   margin-left: 8px;
@@ -129,10 +126,22 @@ export const CartButton = styled(ButtonBase)`
 
   height: 2.375rem;
   width: 2.375rem;
+
+  transition: background-color 0.2s;
+
+  &:hover {
+    background: ${props => props.theme["purple-400"]} !important;
+  }
 `;
 
 export const CartActionButton = styled(ButtonBase)`
   background: transparent;
-  color: ${props => props.theme['purple-700']} !important;
+  color: ${props => props.theme["purple-700"]} !important;
   padding: 0.5rem;
+
+  transition: background-color 0.2s;
+
+  &:hover {
+    background: ${props => props.theme["gray-500"]} !important;
+  }
 `;

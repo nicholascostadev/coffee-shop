@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from "react";
 
 interface CartItemProps {
   title: string;
-  image: React.ReactNode;
+  image: string;
   amount: number;
   price: number;
 }
@@ -16,6 +16,7 @@ interface AddItemToCartProps {
 interface CartContextProps {
   addItemToCart: ({ title, price, image }: AddItemToCartProps) => void;
   removeItemFromCart: (name: string) => void;
+  decreaseAmount: (name: string) => void;
   cart: CartItemProps[];
   subtotal: number;
 }
@@ -51,9 +52,25 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     setCart(cart.filter(item => item.title !== name));
   };
 
+  // make a function that makes the amount of items in the specific item in the cart less 1
+  const decreaseAmount = (name: string) => {
+    const coffeeToDecrease = cart.find(item => item.title === name);
+    if (coffeeToDecrease) {
+      if (coffeeToDecrease.amount - 1 === 0) {
+        removeItemFromCart(name);
+      } else {
+        setCart(prev =>
+          prev.map(item => {
+            return item.title === name ? { ...item, amount: item.amount - 1 } : item;
+          })
+        );
+      }
+    }
+  };
+
   return (
     <CartContext.Provider
-      value={{ cart, subtotal, addItemToCart, removeItemFromCart }}
+      value={{ cart, subtotal, addItemToCart, removeItemFromCart, decreaseAmount }}
     >
       {children}
     </CartContext.Provider>

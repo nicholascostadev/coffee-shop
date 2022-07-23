@@ -1,11 +1,10 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const LayoutContainer = styled.div`
   max-width: 90rem;
   height: calc(100vh - 10rem);
   margin: 0 auto;
 
-  background: ${props => props.theme['gray-100']};
   border-radius: 0.5rem;
 
   display: flex;

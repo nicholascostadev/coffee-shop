@@ -2,8 +2,6 @@ import styled from "styled-components";
 
 export const CheckoutDataContainer = styled.div`
   flex: 0.7;
-
-  //
 `;
 
 export const CheckoutFormContainer = styled.div`

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const HeroContainer = styled.div`
   display: grid;
@@ -11,6 +11,8 @@ export const HeroContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    gap: 2rem 0;
   }
 
   margin-bottom: 8rem;
@@ -18,16 +20,16 @@ export const HeroContainer = styled.div`
 
 export const HeroInfoContainer = styled.div`
   h1 {
-    font-family: 'Baloo 2', 'Roboto', sans-serif;
+    font-family: "Baloo 2", "Roboto", sans-serif;
     font-size: 3rem;
     line-height: 1.3;
-    color: ${props => props.theme['gray-900']};
+    color: ${props => props.theme["gray-900"]};
 
     margin-bottom: 1rem;
   }
 
   p {
-    color: ${props => props.theme['gray-900']};
+    color: ${props => props.theme["gray-900"]};
     font-size: 1.25rem;
   }
 
@@ -47,7 +49,6 @@ export const HeroInfoContainer = styled.div`
 `;
 
 export const HeroImage = styled.img`
-  justify-self: flex-end;
   padding-right: 2rem;
 
   @media (max-width: 1440px) {
@@ -56,18 +57,6 @@ export const HeroImage = styled.img`
 
   @media (max-width: 1000px) {
     padding-right: 0;
+    width: 80%;
   }
-`;
-
-export const BackgroundBlur = styled.div`
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-
-  top: 0;
-  left: 0;
-  z-index: -1;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  position: absolute;
 `;

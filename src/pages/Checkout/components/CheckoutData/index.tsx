@@ -1,11 +1,5 @@
-import {
-  Bank,
-  CreditCard,
-  CurrencyDollar,
-  MapPinLine,
-  Money
-} from "phosphor-react";
-import { useState } from "react";
+import { Bank, CreditCard, CurrencyDollar, MapPinLine, Money } from "phosphor-react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { PaymentOptionButton } from "../../../../components/PaymentOptionButton";
@@ -18,6 +12,7 @@ import {
 } from "./styles";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useLocation } from "../../../../contexts/LocationContext";
 
 const schema = z.object({
   cep: z.string().length(8),
@@ -26,17 +21,18 @@ const schema = z.object({
   complemento: z.string().optional(),
   bairro: z.string(),
   cidade: z.string(),
-  uf: z.string()
+  uf: z.string().length(2)
 });
 
 type PaymentOptionsType = "credit" | "debit" | "money" | null;
 
 export const CheckoutData = () => {
-  const [selectedPayment, setSelectedPayment] =
-    useState<PaymentOptionsType>(null);
+  const { changeLocation } = useLocation();
+  const [selectedPayment, setSelectedPayment] = useState<PaymentOptionsType>(null);
   const {
-    register
-    // formState: { errors },
+    register,
+    watch,
+    formState: { errors }
     // handleSubmit
   } = useForm({
     resolver: zodResolver(schema),
@@ -51,6 +47,13 @@ export const CheckoutData = () => {
     }
   });
 
+  useEffect(() => {
+    const city = watch("cidade");
+    const state = watch("uf");
+
+    changeLocation({ city, state });
+  }, [watch("cidade"), watch("uf")]);
+
   return (
     <CheckoutDataContainer>
       <strong>Complete seu pedido</strong>
@@ -64,18 +67,8 @@ export const CheckoutData = () => {
           </div>
         </div>
         <form>
-          <input
-            placeholder="CEP"
-            className="CEP"
-            type="string"
-            {...register("cep")}
-          />
-          <input
-            placeholder="Rua"
-            className="RUA"
-            type="text"
-            {...register("rua")}
-          />
+          <input placeholder="CEP" className="CEP" type="string" {...register("cep")} />
+          <input placeholder="Rua" className="RUA" type="text" {...register("rua")} />
           <input
             placeholder="Número"
             className="NUMERO"
@@ -83,11 +76,7 @@ export const CheckoutData = () => {
             {...register("numero")}
           />
           <div className="COMPLEMENTO">
-            <input
-              placeholder="Complemento"
-              type="text"
-              {...register("complemento")}
-            />
+            <input placeholder="Complemento" type="text" {...register("complemento")} />
             <span>Opcional</span>
           </div>
           <input
@@ -102,12 +91,8 @@ export const CheckoutData = () => {
             type="text"
             {...register("cidade")}
           />
-          <input
-            placeholder="UF"
-            className="UF"
-            type="text"
-            {...register("uf")}
-          />
+          <input placeholder="UF" className="UF" type="text" {...register("uf")} />
+          {errors.uf && <span>{errors.uf.message}</span>}
         </form>
       </CheckoutFormContainer>
       <PaymentOptionsContainer>
@@ -115,9 +100,7 @@ export const CheckoutData = () => {
           <CurrencyDollar size={22} />
           <div>
             <p>Pagamento</p>
-            <span>
-              O pagamento é feito na entrega. Escolha a forma que deseja pagar
-            </span>
+            <span>O pagamento é feito na entrega. Escolha a forma que deseja pagar</span>
           </div>
         </PaymentOptionsHeader>
         <PaymentOptions>

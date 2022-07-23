@@ -1,6 +1,7 @@
-import currency from "currency.js";
 import { Minus, Plus, ShoppingCart } from "phosphor-react";
+import { useNavigate } from "react-router-dom";
 import { useCartContext } from "../../contexts/CartContext";
+import { formatMoney } from "../../utils/formatMoney";
 import {
   CartActionButton,
   CartButton,
@@ -18,6 +19,7 @@ interface CoffeeProps {
   title: string;
   description: string;
   price: number;
+  amount: number;
 }
 
 export const Coffee = ({
@@ -25,9 +27,37 @@ export const Coffee = ({
   tags,
   title,
   description,
-  price
+  price,
+  amount = 0
 }: CoffeeProps) => {
-  const { addItemToCart } = useCartContext();
+  const navigate = useNavigate();
+  const { addItemToCart, decreaseAmount, removeItemFromCart } = useCartContext();
+
+  const updateCart = (action: ACTION) => {
+    switch (action) {
+      case "add":
+        addItemToCart({
+          title,
+          price,
+          image
+        });
+        break;
+      case "decrease":
+        decreaseAmount(title);
+        break;
+      case "gotoCart":
+        if (amount > 0) {
+          navigate("/checkout");
+        } else {
+          addItemToCart({ title, price, image });
+          navigate("/checkout");
+        }
+        break;
+      case "remove":
+        removeItemFromCart(title);
+        break;
+    }
+  };
 
   return (
     <CoffeeContainer>
@@ -44,27 +74,19 @@ export const Coffee = ({
 
       <CoffeeActions>
         <PriceContainer>
-          <strong>
-            {currency(price, {
-              symbol: "R$",
-              separator: ".",
-              decimal: ","
-            }).format()}
-          </strong>
+          <strong>{formatMoney({ price })}</strong>
         </PriceContainer>
         <div>
           <div>
-            <CartActionButton>
+            <CartActionButton onClick={() => updateCart("decrease")}>
               <Minus />
             </CartActionButton>
-            <strong>0</strong>
-            <CartActionButton
-              onClick={() => addItemToCart({ title, price, image })}
-            >
+            <strong>{amount}</strong>
+            <CartActionButton onClick={() => updateCart("add")}>
               <Plus />
             </CartActionButton>
           </div>
-          <CartButton>
+          <CartButton onClick={() => updateCart("gotoCart")}>
             <ShoppingCart />
           </CartButton>
         </div>
