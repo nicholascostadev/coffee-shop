@@ -30,6 +30,7 @@ export const LocationProvider = ({ children }: LocationProvider) => {
     setLocation({ city, district, street, state, number, zip });
   };
 
+  // allFilled is true when all fields are filled
   const allFilled =
     !!location.city &&
     !!location.state &&
