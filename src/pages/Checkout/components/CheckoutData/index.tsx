@@ -12,6 +12,7 @@ import {
 } from "./styles";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useCartContext } from "../../../../contexts/CartContext";
 import { useLocation } from "../../../../contexts/LocationContext";
 
 const schema = z.object({
@@ -20,14 +21,13 @@ const schema = z.object({
   numero: z.number().positive(),
   complemento: z.string().optional(),
   bairro: z.string(),
-  cidade: z.string(),
+  estado: z.string(),
   uf: z.string().length(2)
 });
 
-type PaymentOptionsType = "credit" | "debit" | "money" | null;
-
-export const CheckoutData = () => {
+export const CheckoutFormSide = () => {
   const { changeLocation } = useLocation();
+  const { changePaymentOption } = useCartContext();
   const [selectedPayment, setSelectedPayment] = useState<PaymentOptionsType>(null);
   const {
     register,
@@ -42,17 +42,30 @@ export const CheckoutData = () => {
       numero: null,
       complemento: "",
       bairro: "",
-      cidade: "",
+      estado: "",
       uf: ""
     }
   });
 
   useEffect(() => {
-    const city = watch("cidade");
-    const state = watch("uf");
+    const city = watch("uf");
+    const state = watch("estado");
+    const number = watch("numero");
+    const street = watch("rua");
+    const district = watch("bairro");
+    const zip = watch("cep");
 
-    changeLocation({ city, state });
-  }, [watch("cidade"), watch("uf")]);
+    changePaymentOption(selectedPayment);
+    changeLocation({ city, state, number, district, street, zip });
+  }, [
+    watch("estado"),
+    watch("uf"),
+    watch("numero"),
+    selectedPayment,
+    watch("bairro"),
+    watch("rua"),
+    watch("cep")
+  ]);
 
   return (
     <CheckoutDataContainer>
@@ -89,7 +102,7 @@ export const CheckoutData = () => {
             placeholder="Cidade"
             className="CIDADE"
             type="text"
-            {...register("cidade")}
+            {...register("estado")}
           />
           <input placeholder="UF" className="UF" type="text" {...register("uf")} />
           {errors.uf && <span>{errors.uf.message}</span>}

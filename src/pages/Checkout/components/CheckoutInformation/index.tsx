@@ -1,6 +1,7 @@
 import { ArrowRight } from "phosphor-react";
 import { useNavigate } from "react-router-dom";
 import { useCartContext } from "../../../../contexts/CartContext";
+import { useLocation } from "../../../../contexts/LocationContext";
 import { formatMoney } from "../../../../utils/formatMoney";
 import { CheckoutItem } from "../CheckoutItem";
 import {
@@ -10,8 +11,9 @@ import {
   CheckoutTotalContainer
 } from "./styles";
 
-export const CheckoutInformation = () => {
+export const CheckoutInformationSide = () => {
   const { cart, subtotal } = useCartContext();
+  const { allFilled } = useLocation();
   const tax = 5;
   const hasAnyCoffeeInCart = cart.length > 0;
 
@@ -57,7 +59,12 @@ export const CheckoutInformation = () => {
               <span>{formatMoney({ price: subtotal + tax })}</span>
             </div>
 
-            <CheckoutConfirmButton>Confirmar pedido</CheckoutConfirmButton>
+            <CheckoutConfirmButton
+              disabled={!allFilled}
+              onClick={() => navigate("/checkout/delivery")}
+            >
+              Confirmar pedido
+            </CheckoutConfirmButton>
           </CheckoutTotalContainer>
         ) : (
           <CheckoutTotalContainer>

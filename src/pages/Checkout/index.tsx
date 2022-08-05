@@ -1,13 +1,13 @@
-import { CheckoutData } from "./components/CheckoutData";
-import { CheckoutInformation } from "./components/CheckoutInformation";
+import { CheckoutFormSide } from "./components/CheckoutData";
+import { CheckoutInformationSide } from "./components/CheckoutInformation";
 
 import { CheckoutContainer } from "./styles";
 
 export const Checkout = () => {
   return (
     <CheckoutContainer>
-      <CheckoutData />
-      <CheckoutInformation />
+      <CheckoutFormSide />
+      <CheckoutInformationSide />
     </CheckoutContainer>
   );
 };

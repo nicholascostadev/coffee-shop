@@ -19,8 +19,8 @@ export const Header = () => {
       <HeaderInfoWrapper>
         <PlaceWrapper onClick={() => navigate("/checkout")}>
           <MapPin size={22} />
-          {location.city && location.state
-            ? `${location.city}, ${location.state}`
+          {location.state && location.city
+            ? `${location.state}, ${location.city}`
             : "Nenhum local identificado ainda"}
         </PlaceWrapper>
         <CartWrapper to="/checkout">

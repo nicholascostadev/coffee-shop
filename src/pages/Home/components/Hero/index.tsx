@@ -1,5 +1,5 @@
 import coffeeImage from "../../../../assets/coffee-image.png";
-import { Advantages } from "../Advantages";
+import { Advantages } from "../../../../components/Advantages";
 import { HeroContainer, HeroImage, HeroInfoContainer } from "./styles";
 
 export const Hero = () => {

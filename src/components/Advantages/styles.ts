@@ -24,6 +24,11 @@ export const Advantage = styled.div`
   font-size: 1rem;
 `;
 
+export const AdvantageDescription = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 interface AdvantageIconProps {
   variant: "YELLOW_DARK" | "YELLOW_LIGHT" | "GRAY_DARK" | "PURPLE_LIGHT";
 }

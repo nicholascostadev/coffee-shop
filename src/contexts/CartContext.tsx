@@ -19,6 +19,8 @@ interface CartContextProps {
   decreaseAmount: (name: string) => void;
   cart: CartItemProps[];
   subtotal: number;
+  paymentOption: PaymentOptionsType;
+  changePaymentOption: (option: PaymentOptionsType) => void;
 }
 
 const CartContext = createContext({} as CartContextProps);
@@ -29,6 +31,16 @@ interface CartProviderProps {
 
 export const CartProvider = ({ children }: CartProviderProps) => {
   const [cart, setCart] = useState([] as CartItemProps[]);
+  const [paymentOption, setPaymentOption] = useState("" as PaymentOptionsType);
+
+  /**
+   *
+   * @param option A Payment option
+   * @examples `credit` | `debit` | `money` | `null`;
+   */
+  const changePaymentOption = (option: PaymentOptionsType) => {
+    setPaymentOption(option);
+  };
 
   const subtotal = cart.reduce((acc, item) => {
     return acc + item.price * item.amount;
@@ -52,7 +64,6 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     setCart(cart.filter(item => item.title !== name));
   };
 
-  // make a function that makes the amount of items in the specific item in the cart less 1
   const decreaseAmount = (name: string) => {
     const coffeeToDecrease = cart.find(item => item.title === name);
     if (coffeeToDecrease) {
@@ -70,7 +81,15 @@ export const CartProvider = ({ children }: CartProviderProps) => {
 
   return (
     <CartContext.Provider
-      value={{ cart, subtotal, addItemToCart, removeItemFromCart, decreaseAmount }}
+      value={{
+        cart,
+        paymentOption,
+        changePaymentOption,
+        subtotal,
+        addItemToCart,
+        removeItemFromCart,
+        decreaseAmount
+      }}
     >
       {children}
     </CartContext.Provider>

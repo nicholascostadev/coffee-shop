@@ -34,7 +34,7 @@ const coffees = [
 ];
 
 export const CoffeeListing = () => {
-  const [coffeesState, setCoffeesState] = useState(coffees);
+  const [coffeesState, setCoffeesState] = useState(coffees); // not useful right now
   const { cart } = useCartContext();
 
   return (
@@ -42,10 +42,9 @@ export const CoffeeListing = () => {
       <h1>Nossos Cafés</h1>
       <div>
         {coffeesState.map(coffee => {
-          const isItemInCart = cart.findIndex(
-            item => item.title === coffee.title
-          );
-          if (isItemInCart === -1)
+          const isItemInCart = cart.findIndex(item => item.title === coffee.title);
+          if (isItemInCart === -1) {
+            // if item is not in cart
             return (
               <Coffee
                 key={coffee.title}
@@ -57,17 +56,20 @@ export const CoffeeListing = () => {
                 amount={0}
               />
             );
-          return (
-            <Coffee
-              key={coffee.title}
-              title={coffee.title}
-              tags={coffee.tags}
-              description={coffee.description}
-              price={coffee.price}
-              image={coffee.image}
-              amount={cart[isItemInCart].amount}
-            />
-          );
+          } else {
+            // if item is in cart
+            return (
+              <Coffee
+                key={coffee.title}
+                title={coffee.title}
+                tags={coffee.tags}
+                description={coffee.description}
+                price={coffee.price}
+                image={coffee.image}
+                amount={cart[isItemInCart].amount}
+              />
+            );
+          }
         })}
       </div>
     </CoffeeListingContainer>
