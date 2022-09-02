@@ -1,7 +1,7 @@
 import { MapPin, Money, Timer } from "phosphor-react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import illustration from "../../assets/illustration.svg";
+import illustration from "../../static/illustration.svg";
 import {
   Advantage,
   AdvantageDescription,
