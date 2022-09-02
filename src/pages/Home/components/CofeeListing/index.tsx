@@ -1,14 +1,11 @@
 import { useState } from "react";
-import coffeeImage from "../../../../assets/coffee-1.png";
-import coffeeImage2 from "../../../../assets/coffee-2.png";
-import coffeeImage3 from "../../../../assets/coffee-3.png";
 import { Coffee } from "../../../../components/Coffee";
 import { useCartContext } from "../../../../contexts/CartContext";
 import { CoffeeListingContainer } from "./styles";
 
 const coffees = [
   {
-    image: coffeeImage,
+    image: "/coffee-1.png",
     tags: ["Tradicional"],
     title: "Expresso Tradicional",
     description: "O tradicional café feito com água quente e grãos moídos",
@@ -16,7 +13,7 @@ const coffees = [
     amount: 0
   },
   {
-    image: coffeeImage2,
+    image: "/coffee-2.png",
     tags: ["Tradicional"],
     title: "Expresso Americano",
     description: "Expresso diluído, menos intenso que o tradicional",
@@ -24,7 +21,7 @@ const coffees = [
     amount: 0
   },
   {
-    image: coffeeImage3,
+    image: "/coffee-3.png",
     tags: ["Tradicional"],
     title: "Expresso Cremoso",
     description: "Café expresso tradicional com espuma cremosa",
@@ -34,7 +31,7 @@ const coffees = [
 ];
 
 export const CoffeeListing = () => {
-  const [coffeesState, setCoffeesState] = useState(coffees); // not useful right now
+  const [coffeesState, ] = useState(coffees); // not useful right now
   const { cart } = useCartContext();
 
   return (

@@ -1,6 +1,5 @@
 import { MapPin, ShoppingCart } from "phosphor-react";
 import { NavLink, useNavigate } from "react-router-dom";
-import logo from "../../assets/logo.svg";
 import { useCartContext } from "../../contexts/CartContext";
 import { useLocation } from "../../contexts/LocationContext";
 import { CartWrapper, HeaderContainer, HeaderInfoWrapper, PlaceWrapper } from "./styles";
@@ -14,7 +13,7 @@ export const Header = () => {
   return (
     <HeaderContainer>
       <NavLink to="/">
-        <img src={logo} alt="" />
+        <img src="/logo.svg" alt="" />
       </NavLink>
       <HeaderInfoWrapper>
         <PlaceWrapper onClick={() => navigate("/checkout")}>

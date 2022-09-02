@@ -1,4 +1,4 @@
-import coffeeImage from "../../../../assets/coffee-image.png";
+
 import { Advantages } from "../../../../components/Advantages";
 import { HeroContainer, HeroImage, HeroInfoContainer } from "./styles";
 
@@ -10,7 +10,7 @@ export const Hero = () => {
         <p>Com o Coffee Delivery você recebe seu café onde estiver, a qualquer hora</p>
         <Advantages />
       </HeroInfoContainer>
-      <HeroImage src={coffeeImage} alt="" />
+      <HeroImage src="/coffee-image.png" alt="" />
     </HeroContainer>
   );
 };

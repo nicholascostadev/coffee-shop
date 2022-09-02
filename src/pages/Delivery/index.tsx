@@ -1,7 +1,6 @@
 import { MapPin, Money, Timer } from "phosphor-react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import illustration from "../../static/illustration.svg";
 import {
   Advantage,
   AdvantageDescription,
@@ -95,7 +94,7 @@ export const Delivery = () => {
             </AdvantageDescription>
           </Advantage>
         </RainbowContainer>
-        <img src={illustration} alt="Ilustração de uma pessoa em uma motocicleta" />
+        <img src="/illustration.svg" alt="Ilustração de uma pessoa em uma motocicleta" />
       </div>
     </DeliveryContainer>
   );
